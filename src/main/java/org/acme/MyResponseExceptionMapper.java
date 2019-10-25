@@ -20,7 +20,7 @@ public class MyResponseExceptionMapper implements ResponseExceptionMapper<MyExce
     @Override
     public boolean handles(int status, MultivaluedMap<String, Object> headers) {
         logger.info("handles() method called");
-        return status == 301;
+        return status == Response.Status.PRECONDITION_FAILED.getStatusCode();
     }
 
     @Override

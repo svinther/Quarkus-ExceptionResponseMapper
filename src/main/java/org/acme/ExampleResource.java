@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/hello")
+@Path("/")
 public class ExampleResource {
 
     @Inject
@@ -18,6 +18,7 @@ public class ExampleResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @Path("/hello")
     public String hello() {
         try {
             Response response = myResource.failMe();
@@ -27,5 +28,11 @@ public class ExampleResource {
         } catch (Throwable e) {
             return "Exceptionmapping not working, caught:\n" + e;
         }
+    }
+
+    @GET
+    @Path("/412")
+    public Response fail() {
+        return Response.status(Response.Status.PRECONDITION_FAILED).build();
     }
 }
